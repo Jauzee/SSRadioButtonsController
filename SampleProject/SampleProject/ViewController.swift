@@ -8,34 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController, SSRadioButtonControllerDelegate {
-
-    @IBOutlet weak var button1: UIButton!
-    @IBOutlet weak var button2: UIButton!
-    @IBOutlet weak var button3: UIButton!
-
-    var radioButtonController: SSRadioButtonsController?
+class ViewController: UIViewController {
+  
+  @IBOutlet weak var button1: SSRadioButton!
+  @IBOutlet weak var button2: SSRadioButton!
+  @IBOutlet weak var button3: SSRadioButton!
+  
+  var radioButtonController: SSRadioButtonsController?
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        radioButtonController = SSRadioButtonsController(buttons: button1, button2, button3)
-        radioButtonController!.delegate = self
-        radioButtonController!.shouldLetDeSelect = true
-
-        // Do any additional setup after loading the view, typically from a nib.
+    radioButtonController = SSRadioButtonsController(buttons: button1, button2, button3)
+    radioButtonController?.shouldLetDeselect = true
+    radioButtonController?.callback = { button in
+      print(button)
     }
-
-    func didSelectButton(selectedButton: UIButton?)
-    {
-        NSLog(" \(selectedButton)" )
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+  }
+  
 }
-
